@@ -10,7 +10,7 @@ import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useUpdateCabin } from "./useUpdateCabin";
 
-function CreateCabinForm({ cabinToUpdate = {} }) {
+function CreateCabinForm({ cabinToUpdate = {}, onCloseModal }) {
   const { id: updateId, ...updateValues } = cabinToUpdate;
   const isUpdateSession = Boolean(updateId);
 
@@ -35,6 +35,7 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
           onSuccess: (data) => {
             //console.log(data);
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -44,6 +45,7 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
         {
           onSuccess: () => {
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -56,7 +58,10 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? "modal" : "regular"}
+    >
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -142,7 +147,11 @@ function CreateCabinForm({ cabinToUpdate = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button $variation="secondary" type="reset">
+        <Button
+          $variation="secondary"
+          type="reset"
+          onClick={() => onCloseModal?.()} //if onCloseModal is undefined then it won't be called, to prevent bug if form was used on another page
+        >
           Cancel
         </Button>
         <Button disabled={isWorking}>
