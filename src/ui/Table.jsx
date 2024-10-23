@@ -7,10 +7,11 @@ const StyledTable = styled.div`
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
-  overflow: hidden;
 `;
 
-const CommonRow = styled.div`
+const CommonRow = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["columns"].includes(prop),
+})`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
   column-gap: 2.4rem;
