@@ -20,14 +20,17 @@ export function useBookings() {
   const [field, direction] = sortByRaw.split("-"); //separate into two
   const sortBy = { field, direction };
 
+  // PAGINATION
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+
   const {
     isPending,
-    data: bookings,
+    data: { data: bookings, count } = {},
     error,
   } = useQuery({
-    queryKey: ["bookings", filter, sortBy], // add filter & sortBy to refetch data upon change (like dependency array)
-    queryFn: () => getBookings({ filter, sortBy }),
+    queryKey: ["bookings", filter, sortBy, page], // add filter & sortBy to refetch data upon change (like dependency array)
+    queryFn: () => getBookings({ filter, sortBy, page }),
   });
 
-  return { isPending, error, bookings };
+  return { isPending, error, bookings, count };
 }
