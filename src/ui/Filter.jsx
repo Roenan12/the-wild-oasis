@@ -40,6 +40,7 @@ function Filter({ filterField, options }) {
   const currentFilter = searchParams.get(filterField) || options.at(0).value; //get selected/active filter
   function handleClick(value) {
     searchParams.set(filterField, value);
+    searchParams.set("page", 1);
     setSearchParams(searchParams);
   }
 
