@@ -4,7 +4,6 @@ import {
   HiOutlineChatBubbleBottomCenterText,
   HiOutlineCheckCircle,
   HiOutlineCurrencyDollar,
-  HiOutlineHomeModern,
 } from "react-icons/hi2";
 
 import DataItem from "../../ui/DataItem";
@@ -68,7 +67,9 @@ const Guest = styled.div`
   }
 `;
 
-const Price = styled.div`
+const Price = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["isPaid"].includes(prop),
+})`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -101,6 +102,16 @@ const Footer = styled.footer`
   text-align: right;
 `;
 
+const Img = styled.img`
+  display: block;
+  width: 6.4rem;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.5) translateX(-7px);
+  border-radius: 0.3rem;
+`;
+
 // A purely presentational component
 function BookingDataBox({ booking }) {
   const {
@@ -116,14 +127,15 @@ function BookingDataBox({ booking }) {
     observations,
     isPaid,
     guests: { fullName: guestName, email, country, countryFlag, nationalID },
-    cabins: { name: cabinName },
+    cabins: { name: cabinName, image: cabinImage },
   } = booking;
 
   return (
     <StyledBookingDataBox>
       <Header>
         <div>
-          <HiOutlineHomeModern />
+          <Img src={cabinImage} />
+
           <p>
             {numNights} nights in Cabin <span>{cabinName}</span>
           </p>
