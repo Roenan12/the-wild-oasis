@@ -94,7 +94,7 @@ function Toggle({ id }) {
     //console.log(rect);
     setPosition({
       x: -8,
-      y: rect.height,
+      y: rect.height + 2,
     });
 
     openId === "" || openId !== id ? open(id) : close();
