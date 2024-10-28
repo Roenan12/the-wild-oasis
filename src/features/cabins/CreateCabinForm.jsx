@@ -148,7 +148,7 @@ function CreateCabinForm({ cabinToUpdate = {}, onCloseModal }) {
       <FormRow>
         {/* type is an HTML attribute! */}
         <Button
-          $variation="secondary"
+          variation="secondary"
           type="reset"
           onClick={() => onCloseModal?.()} //if onCloseModal is undefined then it won't be called, to prevent bug if form was used on another page
         >
