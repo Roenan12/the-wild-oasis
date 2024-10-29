@@ -10,7 +10,7 @@ export function useLogin() {
   const { mutate: login, isPending } = useMutation({
     mutationFn: ({ email, password }) => loginApi({ email, password }),
     onSuccess: (user) => {
-      queryClient.setQueriesData(["user"], user); // set data in RQuery cache
+      queryClient.setQueryData(["user"], user.user); // set data in RQuery cache
       navigate("/dashboard", { replace: true }); // erase the prev page
     },
     onError: (err) => {
