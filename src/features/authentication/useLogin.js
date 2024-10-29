@@ -11,7 +11,7 @@ export function useLogin() {
     mutationFn: ({ email, password }) => loginApi({ email, password }),
     onSuccess: (user) => {
       queryClient.setQueriesData(["user"], user); // set data in RQuery cache
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true }); // erase the prev page
     },
     onError: (err) => {
       console.log("ERROR", err);
