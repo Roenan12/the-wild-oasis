@@ -101,6 +101,17 @@ async function createBookings() {
   if (error) console.log(error.message);
 }
 
+const StyledDiv = styled.div`
+  margin-top: auto;
+  background-color: var(--color-grey-50);
+  border-radius: 5px;
+  text-align: center;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 function Uploader() {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -125,17 +136,6 @@ function Uploader() {
     await createBookings();
     setIsLoading(false);
   }
-
-  const StyledDiv = styled.div`
-    margin-top: auto;
-    background-color: var(--color-grey-50);
-    border-radius: 5px;
-    text-align: center;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  `;
 
   return (
     <StyledDiv>
