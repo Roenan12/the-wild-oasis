@@ -29,7 +29,7 @@ function CreateBookingForm({ onCloseModal }) {
   const [isPaid, setIsPaid] = useState(false);
   const { cabins, isPending: isPending1 } = useCabins();
   const { guests, isPending: isPending2 } = useGuests();
-  const { settings, isLoading: isPending3 } = useSettings();
+  const { settings = {}, isLoading: isPending3 } = useSettings();
 
   const { createBooking, isCreating } = useCreateBooking();
 
@@ -99,7 +99,7 @@ function CreateBookingForm({ onCloseModal }) {
       endDate: new Date(data.endDate).toISOString(),
     };
     createBooking(finalData, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         reset();
         onCloseModal?.();
       },
