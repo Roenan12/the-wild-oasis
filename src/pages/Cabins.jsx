@@ -3,6 +3,7 @@ import Row from "../ui/Row";
 import CabinTable from "../features/cabins/CabinTable";
 import AddCabin from "../features/cabins/AddCabin";
 import CabinTableOperations from "../features/cabins/CabinTableOperations";
+import ButtonGroup from "../ui/ButtonGroup";
 
 function Cabins() {
   return (
@@ -14,8 +15,11 @@ function Cabins() {
 
       <Row>
         <CabinTable />
-        <AddCabin />
       </Row>
+
+      <ButtonGroup>
+        <AddCabin />
+      </ButtonGroup>
     </>
   );
 }
