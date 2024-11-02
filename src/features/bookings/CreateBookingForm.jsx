@@ -116,6 +116,20 @@ function CreateBookingForm({ onCloseModal }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       type={onCloseModal ? "modal" : "regular"}
     >
+      <FormRow label="Select guest">
+        <StyledSelect
+          disabled={isCreating}
+          id="guestId"
+          {...register("guestId")}
+        >
+          {guests.map((guest) => (
+            <option key={guest.id} value={guest.id}>
+              {guest.fullName}
+            </option>
+          ))}
+        </StyledSelect>
+      </FormRow>
+
       <FormRow label="Start date" error={errors?.startDate?.message}>
         <Input
           disabled={isCreating}
@@ -173,19 +187,7 @@ function CreateBookingForm({ onCloseModal }) {
           ))}
         </StyledSelect>
       </FormRow>
-      <FormRow label="Select guest">
-        <StyledSelect
-          disabled={isCreating}
-          id="guestId"
-          {...register("guestId")}
-        >
-          {guests.map((guest) => (
-            <option key={guest.id} value={guest.id}>
-              {guest.fullName}
-            </option>
-          ))}
-        </StyledSelect>
-      </FormRow>
+
       <FormRow label="Further observations">
         <Input
           type="text"
