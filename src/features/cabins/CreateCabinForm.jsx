@@ -32,8 +32,7 @@ function CreateCabinForm({ cabinToUpdate = {}, onCloseModal }) {
       updateCabin(
         { newCabinData: { ...data, image }, id: updateId },
         {
-          onSuccess: (data) => {
-            //console.log(data);
+          onSuccess: () => {
             reset();
             onCloseModal?.();
           },

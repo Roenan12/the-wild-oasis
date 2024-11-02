@@ -13,7 +13,7 @@ export function useCreateBooking() {
     },
     onError: (err) => {
       toast.error(err.message);
-      console.log(err);
+      //console.log(err);
     },
   });
 

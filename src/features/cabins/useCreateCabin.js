@@ -13,7 +13,7 @@ export function useCreateCabin() {
     },
     onError: (err) => {
       toast.error(err.message);
-      console.log(err);
+      //console.log(err);
     },
   });
 
