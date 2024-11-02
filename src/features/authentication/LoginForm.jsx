@@ -7,8 +7,8 @@ import { useLogin } from "./useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
 
 function LoginForm() {
-  const [email, setEmail] = useState("test@example.com");
-  const [password, setPassword] = useState("12345678");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login, isPending } = useLogin();
 
   function handleSubmit(e) {
@@ -53,6 +53,9 @@ function LoginForm() {
           {!isPending ? "Login" : <SpinnerMini />}
         </Button>
       </FormRowVertical>
+      <p>Test account</p>
+      <p>Email: test@example.com</p>
+      <p>Pass: 12345678</p>
     </Form>
   );
 }
