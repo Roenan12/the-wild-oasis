@@ -8,7 +8,6 @@ import { useUpdateSetting } from "./useUpdateSetting";
 function UpdateSettingsForm() {
   const {
     isPending,
-    error,
     settings: {
       minBookingLength,
       maxBookingLength,
