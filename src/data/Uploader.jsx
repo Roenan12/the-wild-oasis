@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect } from "react";
+//import { useState } from "react";
 import { isFuture, isPast, isToday } from "date-fns";
 import supabase from "../services/supabase";
-import Button from "../ui/Button";
+//import Button from "../ui/Button";
 import { subtractDates } from "../utils/helpers";
 
 import { bookings } from "./data-bookings";
 import { cabins } from "./data-cabins";
-import { guests } from "./data-guests";
-import styled from "styled-components";
+// import { guests } from "./data-guests";
+//import styled from "styled-components";
 
 // const originalSettings = {
 //   minBookingLength: 3,
@@ -16,6 +17,7 @@ import styled from "styled-components";
 //   breakfastPrice: 15,
 // };
 
+/*
 async function deleteGuests() {
   const { error } = await supabase.from("guests").delete().gt("id", 0);
   if (error) console.log(error.message);
@@ -24,13 +26,15 @@ async function deleteGuests() {
 async function deleteCabins() {
   const { error } = await supabase.from("cabins").delete().gt("id", 0);
   if (error) console.log(error.message);
-}
+}*/
 
-async function deleteBookings() {
+// eslint-disable-next-line react-refresh/only-export-components
+export async function deleteBookings() {
   const { error } = await supabase.from("bookings").delete().gt("id", 0);
   if (error) console.log(error.message);
 }
 
+/*
 async function createGuests() {
   const { error } = await supabase.from("guests").insert(guests);
   if (error) console.log(error.message);
@@ -40,8 +44,10 @@ async function createCabins() {
   const { error } = await supabase.from("cabins").insert(cabins);
   if (error) console.log(error.message);
 }
+  */
 
-async function createBookings() {
+// eslint-disable-next-line react-refresh/only-export-components
+export async function createBookings() {
   // Bookings need a guestId and a cabinId. We can't tell Supabase IDs for each object, it will calculate them on its own. So it might be different for different people, especially after multiple uploads. Therefore, we need to first get all guestIds and cabinIds, and then replace the original IDs in the booking data with the actual ones from the DB
   const { data: guestsIds } = await supabase
     .from("guests")
@@ -101,6 +107,7 @@ async function createBookings() {
   if (error) console.log(error.message);
 }
 
+/*
 const StyledDiv = styled.div`
   margin-top: auto;
   background-color: var(--color-grey-50);
@@ -111,10 +118,28 @@ const StyledDiv = styled.div`
   flex-direction: column;
   gap: 8px;
 `;
+*/
 
 function Uploader() {
-  const [isLoading, setIsLoading] = useState(false);
+  //const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    const checkTimeAndUpload = () => {
+      const now = new Date();
+      // Check if it's midnight (12:00 AM)
+      if (now.getHours() === 0 && now.getMinutes() === 0) {
+        console.log("Running automated booking upload at midnight...");
+        uploadBookings();
+      }
+    };
+
+    // Set an interval to check the time every 50 secs
+    const intervalId = setInterval(checkTimeAndUpload, 50000); // 50000 ms = 50 seconds
+
+    return () => clearInterval(intervalId); // Cleanup on component unmount
+  }, []);
+
+  /*
   async function uploadAll() {
     setIsLoading(true);
     // Bookings need to be deleted FIRST
@@ -129,26 +154,24 @@ function Uploader() {
 
     setIsLoading(false);
   }
+*/
 
   async function uploadBookings() {
-    setIsLoading(true);
     await deleteBookings();
     await createBookings();
-    setIsLoading(false);
   }
 
   return (
-    <StyledDiv>
-      <h3>SAMPLE DATA</h3>
-
-      <Button onClick={uploadAll} disabled={isLoading}>
-        Upload ALL
-      </Button>
-
-      <Button onClick={uploadBookings} disabled={isLoading}>
-        Upload bookings ONLY
-      </Button>
-    </StyledDiv>
+    // <StyledDiv>
+    //   <h3>SAMPLE DATA</h3>
+    //   <Button onClick={uploadAll} disabled={isLoading}>
+    //     Upload ALL
+    //   </Button>
+    //   <Button onClick={uploadBookings} disabled={isLoading}>
+    //     Upload bookings ONLY
+    //   </Button>
+    // </StyledDiv>
+    <></>
   );
 }
 
