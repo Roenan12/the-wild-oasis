@@ -19,7 +19,7 @@ function CreateGuestForm({ onCloseModal }) {
   const { createGuest, isCreating } = useCreateGuest();
 
   function onSubmit(newGuest) {
-    const countryFlagImg = `https://flagcdn.com/${newGuest.countryFlag}.svg`;
+    const countryFlagImg = `https://flagcdn.com/${newGuest.countryFlag.toLowerCase()}.svg`;
 
     const finalData = {
       ...newGuest,
