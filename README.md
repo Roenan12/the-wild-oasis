@@ -36,7 +36,7 @@ The Wild Oasis is a hotel management booking web app created to streamline booki
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/the-wild-oasis.git
+   git clone https://github.com/Roenan12/the-wild-oasis.git
    cd the-wild-oasis
    ```
 2. Install dependencies:
